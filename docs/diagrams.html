@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Watchful - Redis Monitoring System Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <h1>Watchful - Redis Monitoring System Architecture</h1>
+
+    <h2>System Components</h2>
+    <div class="mermaid">
+        graph TB
+            Client[Redis Client]
+            Updater[RedisStatsUpdater]
+            Checker[RedisChecker]
+            Teams[Teams Webhook]
+            Web[Web Interface]
+            Redis[(Redis Server)]
+
+            Client --> Redis
+            Updater --> Client
+            Updater --> Checker
+            Checker --> Updater
+            Updater --> Teams
+            Web --> Updater
+    </div>
+
+    <h2>Data Flow</h2>
+    <div class="mermaid">
+        sequenceDiagram
+            participant Web as Web Interface
+            participant Updater as RedisStatsUpdater
+            participant Redis as Redis Server
+            participant Checker as RedisChecker
+            participant Teams as Teams Webhook
+
+            Web->>Updater: Request Stats
+            Updater->>Redis: Connect
+            Updater->>Redis: Get Stream Info
+            Updater->>Redis: Get Group Info
+            Updater->>Redis: Get Server Info
+            Redis-->>Updater: Return Stats
+            Updater->>Checker: Check for Warnings
+            Checker-->>Updater: Return Alerts
+            Updater->>Teams: Send New Alerts
+            Updater->>Teams: Send Resolved Alerts
+            Updater-->>Web: Return Stats & Alerts
+    </div>
+
+</body>
+</html>
