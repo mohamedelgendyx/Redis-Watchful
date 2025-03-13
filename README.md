@@ -8,7 +8,7 @@ To get started with the Nursery System REST API, follow these steps:
 3. Add your variables in the `.env` file  
     ```bash
     REDIS_URL = <your_database_uri>
-    TEAMS_WEBHOOK_URL = <your_channel_url>
+    TEAMS_WEBHOOK_URL = <your_channel_webhook>
     CHECK_INTERVAL_MINS = 5
     APP_URL = http://localhost:3000
     ```
@@ -19,4 +19,4 @@ To get started with the Nursery System REST API, follow these steps:
 
 ## Architecture
 
-![alt text](arch.png)
+![arch](arch.png)
