@@ -20,3 +20,6 @@ To get started with the Nursery System REST API, follow these steps:
 ## Architecture
 
 ![arch](arch.png)
+
+
+Supported by **Tactful.ai**
